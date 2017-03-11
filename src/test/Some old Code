@@ -1,0 +1,168 @@
+	private JTextField textfield22;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	
+JButton Peek = new JButton("Peek");
+		Peek.setBounds(10, 11, 89, 46);
+		Queue.add(Peek);
+		
+		JButton Pop = new JButton("Pop");
+		Pop.setBounds(10, 68, 89, 46);
+		Queue.add(Pop);
+		
+		JButton Push = new JButton("Push");
+		Push.setBounds(10, 125, 89, 46);
+		Queue.add(Push);
+		
+		textfield22 = new JTextField();
+		textfield22.setColumns(10);
+		textfield22.setBounds(10, 182, 89, 46);
+		Queue.add(textfield22);
+		
+		JTextPane StackDescription = new JTextPane();
+		StackDescription.setText("In computer science, a stack is an abstract data type that serves as a collection of elements, with two principal operations: push, which adds an element to the collection, and pop, which removes the most recently added element that was not yet removed. The order in which elements come off a stack gives rise to its alternative name, LIFO (for last in, first out). Additionally, a peek operation may give access to the top without modifying the stack.");
+		StackDescription.setSelectionColor(Color.WHITE);
+		StackDescription.setFont(new Font("Courier New", Font.PLAIN, 14));
+		StackDescription.setEditable(false);
+		StackDescription.setDoubleBuffered(true);
+		StackDescription.setBackground(Color.WHITE);
+		StackDescription.setBounds(10, 284, 669, 108);
+		Queue.add(StackDescription);
+		
+		JSeparator stackSeprator = new JSeparator();
+		stackSeprator.setBounds(10, 254, 669, 2);
+		Queue.add(stackSeprator);
+		
+//		JPanel Queue = new JPanel();
+//		Queue.setLayout(null);
+//		tabbedPane.addTab("Queue", null, Queue, null);
+//		queuePane(Queue);
+//		
+//		JPanel List = new JPanel();
+//		List.setLayout(null);
+//		tabbedPane.addTab("List", null, List, null);
+//		listPane(List);
+//		
+//		JPanel Set = new JPanel();
+//		Set.setLayout(null);
+//		tabbedPane.addTab("Set", null, Set, null);
+//		setPane(Set);
+//		
+//		JPanel Tree = new JPanel();
+//		Tree.setLayout(null);
+//		tabbedPane.addTab("Tree", null, Tree, null);
+//		treePane(Tree);
+//		
+//	}
+//
+//
+//	private void treePane(JPanel Tree) {
+//		
+//		
+//		JButton button_9 = new JButton("Peek");
+//		button_9.setBounds(10, 11, 89, 46);
+//		Tree.add(button_9);
+//		
+//		JButton button_10 = new JButton("Pop");
+//		button_10.setBounds(10, 68, 89, 46);
+//		Tree.add(button_10);
+//		
+//		JButton button_11 = new JButton("Push");
+//		button_11.setBounds(10, 125, 89, 46);
+//		Tree.add(button_11);
+//		
+//		textField_4 = new JTextField();
+//		textField_4.setColumns(10);
+//		textField_4.setBounds(10, 182, 89, 46);
+//		Tree.add(textField_4);
+//		
+//		JTextPane textPane_3 = new JTextPane();
+//		textPane_3.setText("In computer science, a stack is an abstract data type that serves as a collection of elements, with two principal operations: push, which adds an element to the collection, and pop, which removes the most recently added element that was not yet removed. The order in which elements come off a stack gives rise to its alternative name, LIFO (for last in, first out). Additionally, a peek operation may give access to the top without modifying the stack.");
+//		textPane_3.setSelectionColor(Color.WHITE);
+//		textPane_3.setFont(new Font("Courier New", Font.PLAIN, 14));
+//		textPane_3.setEditable(false);
+//		textPane_3.setDoubleBuffered(true);
+//		textPane_3.setBackground(Color.WHITE);
+//		textPane_3.setBounds(10, 284, 669, 108);
+//		Tree.add(textPane_3);
+//		
+//		JSeparator separator_4 = new JSeparator();
+//		separator_4.setBounds(10, 271, 669, 2);
+//		Tree.add(separator_4);
+//	}
+//
+//
+//	private void setPane(JPanel Set) {
+//		
+//		
+//		JButton button_6 = new JButton("Peek");
+//		button_6.setBounds(10, 11, 89, 46);
+//		Set.add(button_6);
+//		
+//		JButton button_7 = new JButton("Pop");
+//		button_7.setBounds(10, 68, 89, 46);
+//		Set.add(button_7);
+//		
+//		JButton button_8 = new JButton("Push");
+//		button_8.setBounds(10, 125, 89, 46);
+//		Set.add(button_8);
+//		
+//		textField_3 = new JTextField();
+//		textField_3.setColumns(10);
+//		textField_3.setBounds(10, 182, 89, 46);
+//		Set.add(textField_3);
+//		
+//		JTextPane textPane_2 = new JTextPane();
+//		textPane_2.setText("In computer science, a stack is an abstract data type that serves as a collection of elements, with two principal operations: push, which adds an element to the collection, and pop, which removes the most recently added element that was not yet removed. The order in which elements come off a stack gives rise to its alternative name, LIFO (for last in, first out). Additionally, a peek operation may give access to the top without modifying the stack.");
+//		textPane_2.setSelectionColor(Color.WHITE);
+//		textPane_2.setFont(new Font("Courier New", Font.PLAIN, 14));
+//		textPane_2.setEditable(false);
+//		textPane_2.setDoubleBuffered(true);
+//		textPane_2.setBackground(Color.WHITE);
+//		textPane_2.setBounds(10, 284, 669, 108);
+//		Set.add(textPane_2);
+//		
+//		JSeparator separator_3 = new JSeparator();
+//		separator_3.setBounds(10, 271, 669, 2);
+//		Set.add(separator_3);
+//	}
+//
+//
+//	private void listPane(JPanel List) {
+//		
+//		
+//		JButton button_3 = new JButton("Peek");
+//		button_3.setBounds(10, 11, 89, 46);
+//		List.add(button_3);
+//		
+//		JButton button_4 = new JButton("Pop");
+//		button_4.setBounds(10, 68, 89, 46);
+//		List.add(button_4);
+//		
+//		JButton button_5 = new JButton("Push");
+//		button_5.setBounds(10, 125, 89, 46);
+//		List.add(button_5);
+//		
+//		textField_2 = new JTextField();
+//		textField_2.setColumns(10);
+//		textField_2.setBounds(10, 182, 89, 46);
+//		List.add(textField_2);
+//		
+//		JTextPane textPane_1 = new JTextPane();
+//		textPane_1.setText("In computer science, a stack is an abstract data type that serves as a collection of elements, with two principal operations: push, which adds an element to the collection, and pop, which removes the most recently added element that was not yet removed. The order in which elements come off a stack gives rise to its alternative name, LIFO (for last in, first out). Additionally, a peek operation may give access to the top without modifying the stack.");
+//		textPane_1.setSelectionColor(Color.WHITE);
+//		textPane_1.setFont(new Font("Courier New", Font.PLAIN, 14));
+//		textPane_1.setEditable(false);
+//		textPane_1.setDoubleBuffered(true);
+//		textPane_1.setBackground(Color.WHITE);
+//		textPane_1.setBounds(10, 284, 669, 108);
+//		List.add(textPane_1);
+//		
+//		JSeparator separator_2 = new JSeparator();
+//		separator_2.setBounds(10, 271, 669, 2);
+//		List.add(separator_2);
+//	}
+//
+//
+//	private void queuePane(JPanel Queue) {
