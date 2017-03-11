@@ -31,6 +31,7 @@ public class StackGraphics extends Stack {
 	private void buildStackBlock(Graphics g) {
 		g.drawString(stackItemString, x + 60, y + 16 - getStackPixelHeight());
 		g.drawRect(x, y - getStackPixelHeight(), 180, 32);
+		g.drawRect(x+2, y+2 - getStackPixelHeight(), 176, 28);
 	}
 
 	private boolean checkIfTopItem(Graphics g) {

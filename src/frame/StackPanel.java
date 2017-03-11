@@ -72,38 +72,18 @@ public class StackPanel extends JPanel {
 
 	private void buildButtons() {
 		JButton btnPop = new JButton("Pop");
-		btnPop.addActionListener(pop -> {
-			repaintAndValidate();
-			if(!stack.pop()){
-				JOptionPane.showMessageDialog(this, "Empty Stack. Nothing to Pop!", "Error", JOptionPane.ERROR_MESSAGE);
-
-			}
-		});
+		btnPop.addActionListener(pop -> {doPopOperation();});
 		add(btnPop, "cell 0 1,grow");
 
 		JButton btnPeek = new JButton("Peek");
-		btnPeek.addActionListener(peek -> {
-			if(stack.peek() == null){
-				JOptionPane.showMessageDialog(this, "Empty Stack. Nothing to Peek!", "Error", JOptionPane.ERROR_MESSAGE);
-
-			}
-		});
+		btnPeek.addActionListener(peek -> {doPeekOperation();});
 		add(btnPeek, "cell 0 2,grow");
 
 		JButton btnPush = new JButton("Push");
-		btnPush.addActionListener(push -> {
-
-			if (!newStackItem.getText().isEmpty()) {
-				stack.push(newStackItem.getText());
-				repaintAndValidate();
-			} else {
-				JOptionPane.showMessageDialog(this, "Empty Text Field!", "Error", JOptionPane.ERROR_MESSAGE);
-			}
-
-		});
+		btnPush.addActionListener(push -> {doPushOperation();});
 		add(btnPush, "cell 0 7,grow");
 	}
-	
+
 	protected void repaintAndValidate() {
 		getTopLevelAncestor().revalidate();
 		getTopLevelAncestor().repaint();
@@ -113,5 +93,33 @@ public class StackPanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		stack.paintStack(g);
 	}
+	
+	private void doPopOperation() {
+		repaintAndValidate();
+		if(!stack.pop()){
+			JOptionPane.showMessageDialog(this, "Empty Stack. Nothing to Pop!", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void doPushOperation() {
+		if (!newStackItem.getText().isEmpty()) {
+			stack.push(newStackItem.getText());
+			repaintAndValidate();
+		} else {
+			JOptionPane.showMessageDialog(this, "Empty Text Field!", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void doPeekOperation() {
+		if(stack.peek() == null){
+			JOptionPane.showMessageDialog(this, "Empty Stack. Nothing to Peek!", "Error", JOptionPane.ERROR_MESSAGE);
+		}else{
+			peekResult.setText(stack.peek());
+		}
+	}
+
+	
+	
+
 
 }
