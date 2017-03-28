@@ -2,47 +2,59 @@ package dataStructures;
 
 import java.awt.Graphics;
 
+/**
+ * Extends the Stack class for graphical to output a visual version of the stack. 
+ * @author Benjamin Wilson
+ *
+ */
 public class StackGraphics extends Stack {
-
-	private static int x = 330;
-	private int y = 280;
-	
-	
-	
-	private String stackItemString;
+	//private String stackItemString;
 	private boolean isFirstItem;
 
+	/**
+	 * Builds and paints stack items.
+	 */
 	public void paintStack(Graphics g) {
 		buildStrings();
-		y = 280;
 		isFirstItem = true;
 		assembleStackBlocks(g);
 	}
 
+	/**
+	 * 
+	 */
 	private void assembleStackBlocks(Graphics g) {
 		while (stringsToPrint.hasNext()) {
-			stackItemString = stringsToPrint.next();
-			buildStackBlock(g);
-			isFirstItem = checkIfTopItem(g);
-			y = y + 30;
+			setItemString(stringsToPrint.next());
+			buildBlock(g);
+			isFirstItem = drawFlagIfTopItem(g);
 		}
 	}
 
-	private void buildStackBlock(Graphics g) {
-		g.drawString(stackItemString, x + 60, y + 16 - getStackPixelHeight());
-		g.drawRect(x, y - getStackPixelHeight(), 180, 32);
-		g.drawRect(x+2, y+2 - getStackPixelHeight(), 176, 28);
-	}
+	/**
+	 * Builds the block for each item in the stack.
+	 */
+//	private void buildStackBlock(Graphics g) {
+//		g.drawString(itemString, x + 60, y + 16 - getStackPixelHeight());
+//		g.drawRect(x, y - getStackPixelHeight(), 180, 32);
+//		g.drawRect(x+2, y+2 - getStackPixelHeight(), 176, 28);
+//	}
 
-	private boolean checkIfTopItem(Graphics g) {
+	/**
+	 * Checks if the item is the top item to place a indicator(top->) next to it. 
+	 */
+	private boolean drawFlagIfTopItem(Graphics g) {
 		if (isFirstItem) {
-			g.drawString("top->", x - 30, y + 22 - getStackPixelHeight());
+			drawFlag(g);
 			isFirstItem = false;
 		}
 		return isFirstItem;
 	}
 	
+	/**
+	 * Returns the blocks y height * the size of the stack.
+	 */
 	private int getStackPixelHeight(){
 		return 30 * getStackSize();
-		}
+	}
 }
