@@ -1,6 +1,5 @@
 package frame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,6 +23,7 @@ public class driver extends JFrame {
 			public void run() {
 				try {
 					driver frame = new driver();//build self.
+					frame.pack();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,13 +51,13 @@ public class driver extends JFrame {
 		StackPanel Stack = new StackPanel();
 		tabbedPane.addTab("Stack", null, Stack, null);
 
-		StackPanel Queue = new StackPanel();
+		QueuePanel Queue = new QueuePanel();
 		tabbedPane.addTab("Queue", null, Queue, null);
 
-		StackPanel List = new StackPanel();
+		ListPanel List = new ListPanel();
 		tabbedPane.addTab("List", null, List, null);
 
-		StackPanel Set = new StackPanel();
+		SetsPanel Set = new SetsPanel();
 		tabbedPane.addTab("Set", null, Set, null);
 
 		StackPanel Tree = new StackPanel();

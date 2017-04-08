@@ -1,26 +1,26 @@
 package dataStructures;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+
 import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
- * This class provides a stack and its functions, Push, Pop and Peek. It can be extended by a graphics processors class 
- * called StackGraphics to provide an visual representation of the current items inside the stack.
+ * This class provides a abstractStructure and its functions, Push, Pop and Peek. It can be extended by a graphics processors class 
+ * called abstractStructureGraphics to provide an visual representation of the current items inside the abstractStructure.
  * @author Benjamin Wilson
  */
 public class Stack extends dataStructureGraphics{
 
-	protected Deque<String> stack = new ArrayDeque<String>();
+	protected LinkedList<String> abstractStructure = new LinkedList<String>();
 
 	protected Iterator<String> stringsToPrint;
 
 	/**
-	 * removes the last item from the stack.
+	 * removes the last item from the abstractStructure.
 	 */
 	public boolean pop() {
 		try {
-			stack.removeFirst();
+			abstractStructure.removeFirst();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -28,44 +28,45 @@ public class Stack extends dataStructureGraphics{
 	}
 
 	/**
-	 * pushes a new item into the stack.
+	 * pushes a new item into the abstractStructure.
 	 */
 	public void push(String newItemToAdd) {		
-		stack.addFirst(newItemToAdd);
+		abstractStructure.addFirst(newItemToAdd);
 	}
 
+
 	/**
-	 * return the last item added to the stack.
+	 * return the last item added to the abstractStructure.
 	 */
 	public String peek() {
-		String firstItemInStack = stack.peekFirst();
-		return firstItemInStack;
+		String firstItem = abstractStructure.peekFirst();
+		return firstItem;
 	}
 
 	/**
-	 * return the size of the stack.
+	 * return the size of the abstractStructure.
 	 */
-	public int getStackSize() {
-		int numberOfItemsInStack = stack.size();
-		return numberOfItemsInStack;
+	public int getSize() {
+		int numberOfItems = abstractStructure.size();
+		return numberOfItems;
 	}
 
 	/**
 	 * builds an iterator and then loops and prints each element.
 	 */
-	public void printStackToConsole() {
+	public void printItemsToConsole() {
 		buildStrings();
-		while (stringsToPrint.hasNext()) {
+		while(stringsToPrint.hasNext()) {
 			String element = stringsToPrint.next();
 			System.out.println(element + " ");
 		}
 	}
 
 	/**
-	 * assembles an iterator of strings from the current stack.
+	 * assembles an iterator of strings from the current abstractStructure.
 	 */
 	public void buildStrings() {
-		stringsToPrint = stack.iterator();
+		stringsToPrint = abstractStructure.iterator();
 	}
 
 }

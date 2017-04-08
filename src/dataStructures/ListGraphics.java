@@ -5,11 +5,13 @@ import java.awt.Graphics;
 /**
  * Extends the Stack class for graphical to output a visual version of the stack. 
  * @author Benjamin Wilson
+ * @param <T>
  *
  */
-public class StackGraphics extends Stack {
+public class ListGraphics<T> extends ListDriver {
 	//private String stackItemString;
-	private boolean isFirstItem;
+	private boolean drawHeadAndTail;
+
 	
 	protected static int x;
 	protected static int y;
@@ -20,30 +22,32 @@ public class StackGraphics extends Stack {
 	 * @param x 
 	 */
 	private void setGraphicsCoordinates(int x, int y) {
-		StackGraphics.x = x;
-		StackGraphics.y = y;
+		ListGraphics.x = x;
+		ListGraphics.y = y;
 	}
 
 	/**
 	 * Builds and paints stack items.
 	 */
-	public void paintStack(Graphics g) {
-		assembleStackBlocks(g);
+	public void paintList(Graphics g) {
+		//assembleListBlocks(g);
 	}
 
 	/**
 	 * Builds the stack with graphics.
 	 */
-	private void assembleStackBlocks(Graphics g) {
+	private void assembleListBlocks(Graphics g) {
 		buildStrings();
 		setGraphicsCoordinates(240 ,480);
-		isFirstItem = true;
+		drawHeadAndTail = true;
 		while (stringsToPrint.hasNext()) {
 			setItemString(stringsToPrint.next());
-			if (isFirstItem) {
-				drawTopItemFlag(g);
+			if (drawHeadAndTail) {
+				drawHeadItemFlag(g);
+				drawTailItemFlag(g);
+				drawHeadAndTail = false;
 			}
-			buildStackBlock(g);
+			buildListBlock(g);
 			y = y + 30;
 		}
 	}
@@ -51,23 +55,27 @@ public class StackGraphics extends Stack {
 	/**
 	 * Builds the block for each item in the stack.
 	 */
-	private void buildStackBlock(Graphics g) {
-		buildBlock(g, x, y - getStackPixelHeight());
+	private void buildListBlock(Graphics g) {
+		buildBlock(g, x, y - getPixelHeight());
 	}
 
 	/**
 	 * Checks if the item is the top item to place a indicator(top->) next to it. 
 	 */
-	private void drawTopItemFlag(Graphics g) {
-			setBlockFlag("Top");
-			drawFlag(g, x - 35, y + 22 - getStackPixelHeight());
-			isFirstItem = false;
+	private void drawHeadItemFlag(Graphics g) {
+		setBlockFlag("Head");
+		drawFlag(g, x - 35, y + 22 - getPixelHeight());
+	}
+	
+	private void drawTailItemFlag(Graphics g) {
+		setBlockFlag("Tail");
+		drawFlag(g, x - 35, y + 22);
 	}
 	
 	/**
 	 * Returns the blocks y height * the size of the stack.
 	 */
-	private int getStackPixelHeight(){
+	private int getPixelHeight(){
 		return 30 * getSize();
 	}
 }
