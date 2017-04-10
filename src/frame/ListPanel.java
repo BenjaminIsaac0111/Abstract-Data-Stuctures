@@ -26,7 +26,7 @@ import javax.swing.border.EtchedBorder;
 public class ListPanel extends PaneLayout {
 
 
-	ListDriver List = new ListDriver();
+	ListGraphics<String> List = new ListGraphics<String>();
 
 	private JTextField newListItem;
 	private JTextPane ListDescriptionPane;
@@ -98,7 +98,7 @@ public class ListPanel extends PaneLayout {
 	      @Override
 	      public void paintComponent(Graphics g) {
 	         super.paintComponent(g);
-	         //List.paintList(g);
+	         List.paintList(g);
 	      }
 	}
 	 

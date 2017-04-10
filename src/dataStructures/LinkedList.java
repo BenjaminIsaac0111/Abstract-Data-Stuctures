@@ -8,15 +8,23 @@ package dataStructures;
 class MyLinkedList<T> implements AbstractDataStructureInteface<T>{
 
 	
-	public LinkElementData<T> head;
-	public LinkElementData<T> next;
+	public LinkElementSegment<T> head;
+	public LinkElementSegment<T> next;
 	
 	
-	protected LinkElementData<T> getHead() {
+	protected T getHeadType() {
+		return head.getData();
+	}
+
+	protected T getNextType() {
+		return next.getPrevSegmentData();
+	}
+	
+	protected LinkElementSegment<T> getHead() {
 		return head;
 	}
 
-	protected LinkElementData<T> getNext() {
+	protected LinkElementSegment<T> getNext() {
 		return next;
 	}
 
@@ -24,15 +32,15 @@ class MyLinkedList<T> implements AbstractDataStructureInteface<T>{
 
 	@Override
 	public void push(T element) {
-		head = new LinkElementData<T>(element, head);
-		next = head.getPrevLinkElement();
+		head = new LinkElementSegment<T>(element, head);
+		next = head.getPrevSegment();
 	}
 
 	@Override
 	public T pop() {
 		if ( head != null )	{
-			T element = head.getElement();
-			head = head.getPrevLinkElement();
+			T element = head.getData();
+			head = head.getPrevSegment();
 			
 			return element;
 		}
@@ -43,7 +51,7 @@ class MyLinkedList<T> implements AbstractDataStructureInteface<T>{
 	@Override
 	public T peek() {
 		if ( head != null ){
-			return head.getElement();
+			return head.getData();
 		}
 		return null;
 	}

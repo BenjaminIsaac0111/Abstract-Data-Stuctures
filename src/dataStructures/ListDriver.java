@@ -4,9 +4,6 @@ public class ListDriver extends dataStructureGraphics {
 	
 	MyLinkedList<String> list = new MyLinkedList<String>();
 
-	/**
-	 *
-	 */
 
 		/**
 		 * removes the last item from the abstractStructure.
@@ -25,7 +22,6 @@ public class ListDriver extends dataStructureGraphics {
 			list.push(newItemToAdd);
 		}
 
-
 		/**
 		 * return the last item added to the abstractStructure.
 		 */
@@ -39,25 +35,37 @@ public class ListDriver extends dataStructureGraphics {
 		public int getSize() {
 			return list.getSize();
 		}
+		
+		protected String getHeadType() {
+			try {
+				return list.getHeadType();
+			} catch (Exception e) {}
+			return "Null Pointer";
+		}
+
+		protected String getNextType() {
+			try {
+				return list.getNextType();
+			} catch (Exception e) {}
+			return "Null Pointer";
+		}
+		
 
 		/**
-		 * builds an iterator and then loops and prints each element.
+		 * Output all items to the terminal.
 		 */
 		public void printItemsToConsole() {
-			String element = list.getHead().getElement();
-			while(element != null){
-				System.out.println(element);
-				element = list.getNext().getElement();
-			}
-		}
-
-		/**
-		 * assembles an iterator of strings from the current abstractStructure.
-		 */
-		public void buildStrings() {
+			LinkElementSegment<String> segment = list.getHead();
 			
+			try {
+				while (segment != null){
+					System.out.println("Data: "+segment.getData() + " Next:" +segment.getPrevSegmentData());
+					segment = segment.getPrevSegment();
+				}
+			} catch (Exception e) {}
 		}
-
+		
+		
 	}
 	
 	

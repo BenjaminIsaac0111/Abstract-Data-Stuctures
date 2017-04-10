@@ -30,23 +30,24 @@ public class ListGraphics<T> extends ListDriver {
 	 * Builds and paints stack items.
 	 */
 	public void paintList(Graphics g) {
-		//assembleListBlocks(g);
+		assembleListBlocks(g);
 	}
 
 	/**
 	 * Builds the stack with graphics.
 	 */
 	private void assembleListBlocks(Graphics g) {
-		buildStrings();
+		LinkElementSegment<String> segment = list.getHead();
+
 		setGraphicsCoordinates(240 ,480);
 		drawHeadAndTail = true;
-		while (stringsToPrint.hasNext()) {
-			setItemString(stringsToPrint.next());
+		while (segment != null) {
 			if (drawHeadAndTail) {
 				drawHeadItemFlag(g);
 				drawTailItemFlag(g);
 				drawHeadAndTail = false;
 			}
+			setItemString("Data: "+segment.getData() + "Next:" + segment.getPrevSegmentData());
 			buildListBlock(g);
 			y = y + 30;
 		}

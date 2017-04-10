@@ -7,7 +7,7 @@ package dataStructures;
  *
  * @param <T> the type for the element.
  */
-class LinkElementData<T> {
+class LinkElementSegment<T> {
 
 	/**
 	 * The stored element.
@@ -17,7 +17,7 @@ class LinkElementData<T> {
 	/**
 	 * The previous link element in the linked stack, can be null if no previous link element exists.
 	 */
-	private final LinkElementData<T> next;
+	private final LinkElementSegment<T> next;
 	
 	int size = 1;
 	
@@ -25,7 +25,7 @@ class LinkElementData<T> {
 	 * @param theElement the stored element.
 	 * @param prevElement  the previous element in the linked stack.
 	 */
-	LinkElementData(T data, LinkElementData<T> next) {		
+	LinkElementSegment(T data, LinkElementSegment<T> next) {		
 		this.data = data;
 		this.next = next;
 		if(next != null){
@@ -36,16 +36,24 @@ class LinkElementData<T> {
 	 * Gets the stored element.
 	 * @return the stored element.
 	 */
-	public T getElement() {	
+	public T getData() {	
 		return data;
 	}
 
 	/**
-	 * Gets the previous link element in the linked stack, can be null if no previous element exists.
+	 * Gets the previous link element reference in the linked stack, can be null if no previous element exists.
 	 * @return the previous link element in the linked stack
 	 */
-	public LinkElementData<T> getPrevLinkElement() {	
+	public LinkElementSegment<T> getPrevSegment() {	
 		return next;
+	}
+	
+	/**
+	 * Returns the previous link element in its specified type, can be null if no previous element exists.
+	 * @return the previous link element in the linked stack
+	 */
+	public T getPrevSegmentData() {	
+		return next.getData();
 	}
 	/**
 	 * @return the size of list.
