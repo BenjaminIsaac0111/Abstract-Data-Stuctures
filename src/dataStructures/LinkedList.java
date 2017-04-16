@@ -9,7 +9,7 @@ class MyLinkedList<T> implements AbstractDataStructureInteface<T>{
 
 	
 	public LinkElementSegment<T> head;
-	public LinkElementSegment<T> next;
+	public LinkElementSegment<T> next = null;
 	
 	
 	protected T getHeadType() {
@@ -62,12 +62,44 @@ class MyLinkedList<T> implements AbstractDataStructureInteface<T>{
 	}	
 	
 	public int getSize(){
-		return head.getSize();
+		try {
+			return head.getSize();
+		} catch (Exception e) {
+			return 0;
+		}
+		
 	}
 
 	@Override
 	public void buildIterator() {
 		
+	}
+
+	public T findDataByIndex(int index) {
+		LinkElementSegment<T> segment = head;
+
+		for(int i = 0; i < getSize(); i++){
+			if(index == segment.getSize()){
+				return segment.getData();
+			}
+		segment = segment.getPrevSegment();
+
+		}
+		return null;
+
+	}
+
+	public T findNextByIndex(int index) {
+		LinkElementSegment<T> segment = head;
+
+		for(int i = 0; i < getSize(); i++){
+			if(index == segment.getSize() && segment.getPrevSegmentData() != null){
+				return segment.getPrevSegmentData();
+			}
+		segment = segment.getPrevSegment();
+
+		}
+		return null;
 	}
 	
 }

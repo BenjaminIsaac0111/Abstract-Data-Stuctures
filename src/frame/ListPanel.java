@@ -86,7 +86,7 @@ public class ListPanel extends PaneLayout {
 		add(btnPop, "cell 0 1,grow");
 
 		JButton btnPeek = new JButton("Peek");
-		btnPeek.addActionListener(peek -> {doPeekOperation();});
+		btnPeek.addActionListener(peek -> {List.printItemsToConsole();});
 		add(btnPeek, "cell 0 2,grow");
 		
 		JButton btnPush = new JButton("Push");

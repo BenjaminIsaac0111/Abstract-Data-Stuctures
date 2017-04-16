@@ -19,7 +19,7 @@ class LinkElementSegment<T> {
 	 */
 	private final LinkElementSegment<T> next;
 	
-	int size = 1;
+	int size = 0;
 	
 	/** 
 	 * @param theElement the stored element.

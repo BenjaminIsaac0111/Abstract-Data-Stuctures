@@ -33,7 +33,10 @@ public class ListDriver extends dataStructureGraphics {
 		 * return the size of the abstractStructure.
 		 */
 		public int getSize() {
-			return list.getSize();
+			try {
+				return list.getSize();
+			} catch (Exception e) {}
+			return 0;
 		}
 		
 		protected String getHeadType() {
@@ -50,6 +53,13 @@ public class ListDriver extends dataStructureGraphics {
 			return "Null Pointer";
 		}
 		
+		protected LinkElementSegment<String> getHead() {
+			return list.getHead();
+		}
+
+		protected LinkElementSegment<String> getNext() {
+			return list.getNext();
+		}
 
 		/**
 		 * Output all items to the terminal.
@@ -58,8 +68,12 @@ public class ListDriver extends dataStructureGraphics {
 			LinkElementSegment<String> segment = list.getHead();
 			
 			try {
-				while (segment != null){
-					System.out.println("Data: "+segment.getData() + " Next:" +segment.getPrevSegmentData());
+				for(int i = 0; i <= list.getSize(); i++){
+					System.out.println(
+								"Data: "+segment.getData() + 
+								" || Next: " +segment.getPrevSegmentData() + 
+								" || Index: " + segment.getSize()
+							);
 					segment = segment.getPrevSegment();
 				}
 			} catch (Exception e) {}

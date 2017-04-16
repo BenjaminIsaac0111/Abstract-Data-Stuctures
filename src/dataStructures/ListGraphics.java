@@ -12,6 +12,7 @@ public class ListGraphics<T> extends ListDriver {
 	//private String stackItemString;
 	private boolean drawHeadAndTail;
 
+	String head, next;
 	
 	protected static int x;
 	protected static int y;
@@ -37,27 +38,22 @@ public class ListGraphics<T> extends ListDriver {
 	 * Builds the stack with graphics.
 	 */
 	private void assembleListBlocks(Graphics g) {
-		LinkElementSegment<String> segment = list.getHead();
 
-		setGraphicsCoordinates(240 ,480);
-		drawHeadAndTail = true;
-		while (segment != null) {
-			if (drawHeadAndTail) {
-				drawHeadItemFlag(g);
-				drawTailItemFlag(g);
-				drawHeadAndTail = false;
+			setGraphicsCoordinates(200 ,480);
+			for(int i = 0; i < list.getSize(); i++){
+				setItemString("Data: "+ list.findDataByIndex(i) +  "Next:"+ list.findDataByIndex(i));
+				buildListBlock(g);
+
 			}
-			setItemString("Data: "+segment.getData() + "Next:" + segment.getPrevSegmentData());
-			buildListBlock(g);
 			y = y + 30;
-		}
+		
 	}
 
 	/**
 	 * Builds the block for each item in the stack.
 	 */
 	private void buildListBlock(Graphics g) {
-		buildBlock(g, x, y - getPixelHeight());
+		buildBlock(g, x, y );
 	}
 
 	/**
@@ -70,7 +66,7 @@ public class ListGraphics<T> extends ListDriver {
 	
 	private void drawTailItemFlag(Graphics g) {
 		setBlockFlag("Tail");
-		drawFlag(g, x - 35, y + 22);
+		drawFlag(g, x - 35, y + 22 - getPixelHeight());
 	}
 	
 	/**
