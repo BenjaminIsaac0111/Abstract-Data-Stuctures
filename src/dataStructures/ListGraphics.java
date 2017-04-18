@@ -10,22 +10,13 @@ import java.awt.Graphics;
  */
 public class ListGraphics<T> extends ListDriver {
 	//private String stackItemString;
-	private boolean drawHeadAndTail;
 
 	String head, next;
 	
 	protected static int x;
 	protected static int y;
 
-	/**
-	 * Sets coordinates using x,y.
-	 * @param y 
-	 * @param x 
-	 */
-	private void setGraphicsCoordinates(int x, int y) {
-		ListGraphics.x = x;
-		ListGraphics.y = y;
-	}
+	
 
 	/**
 	 * Builds and paints stack items.
@@ -39,21 +30,36 @@ public class ListGraphics<T> extends ListDriver {
 	 */
 	private void assembleListBlocks(Graphics g) {
 
-			setGraphicsCoordinates(200 ,480);
+		if(list.getSize() != 0){
+			setGraphicsCoordinates(200 ,50);
+			
+			drawTailItemFlag(g);
 			for(int i = 0; i < list.getSize(); i++){
-				setItemString("Data: "+ list.findDataByIndex(i) +  "Next:"+ list.findDataByIndex(i));
+				setItemString("Data: "+ list.findDataByIndex(i) +  " || Next:"+ list.findNextByIndex(i));
+				
 				buildListBlock(g);
+				y = y - 30;
 
 			}
-			y = y + 30;
+			drawHeadItemFlag(g);
+		}
 		
+	}
+	/**
+	 * Sets coordinates using x,y.
+	 * @param y 
+	 * @param x 
+	 */
+	private void setGraphicsCoordinates(int x, int y) {
+		ListGraphics.x = x;
+		ListGraphics.y = y;
 	}
 
 	/**
 	 * Builds the block for each item in the stack.
 	 */
 	private void buildListBlock(Graphics g) {
-		buildBlock(g, x, y );
+		buildBlock(g, x, y + getPixelHeight());
 	}
 
 	/**
@@ -61,12 +67,12 @@ public class ListGraphics<T> extends ListDriver {
 	 */
 	private void drawHeadItemFlag(Graphics g) {
 		setBlockFlag("Head");
-		drawFlag(g, x - 35, y + 22 - getPixelHeight());
+		drawFlag(g, x - 45, y + 50 + getPixelHeight());
 	}
 	
 	private void drawTailItemFlag(Graphics g) {
 		setBlockFlag("Tail");
-		drawFlag(g, x - 35, y + 22 - getPixelHeight());
+		drawFlag(g, x - 40, y + 22 + getPixelHeight());
 	}
 	
 	/**

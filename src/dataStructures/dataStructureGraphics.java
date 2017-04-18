@@ -28,7 +28,7 @@ public class dataStructureGraphics {
 
 	protected void buildBlock(Graphics g,int blockX, int blockY) {
 		try {
-			g.drawString(itemString, blockX + 60, blockY + 16);
+			g.drawString(itemString, blockX + 30, blockY + 16);
 			g.drawRect(blockX, blockY, 180, 32);
 			g.drawRect(blockX+2, blockY+2, 176, 28);
 		} catch (Exception e) {

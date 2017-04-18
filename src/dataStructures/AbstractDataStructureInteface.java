@@ -35,6 +35,8 @@ public interface AbstractDataStructureInteface<T> {
 	 */
 	boolean isEmpty();
 	
+	int getSize();
+
 	
 	void buildIterator();
 

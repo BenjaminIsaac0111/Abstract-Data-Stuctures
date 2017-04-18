@@ -26,8 +26,11 @@ class LinkElementSegment<T> {
 	 * @param prevElement  the previous element in the linked stack.
 	 */
 	LinkElementSegment(T data, LinkElementSegment<T> next) {		
+		
+		
 		this.data = data;
 		this.next = next;
+		
 		if(next != null){
 			size = next.getSize() + 1;
 		}
