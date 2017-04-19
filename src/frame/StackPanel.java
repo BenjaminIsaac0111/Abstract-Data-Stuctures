@@ -98,7 +98,7 @@ public class StackPanel extends PaneLayout {
 	      @Override
 	      public void paintComponent(Graphics g) {
 	         super.paintComponent(g);
-	         stack.paintStack(g);
+	         stack.paint(g);
 	      }
 	}
 	 

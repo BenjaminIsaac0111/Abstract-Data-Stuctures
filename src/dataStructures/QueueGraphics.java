@@ -7,9 +7,8 @@ import java.awt.Graphics;
  * @author Benjamin Wilson
  *
  */
-public class StackGraphics extends Stack {
-	protected boolean drawFlags;
-	
+public class QueueGraphics extends Queue {
+
 	protected static int x;
 	protected static int y;
 
@@ -19,20 +18,16 @@ public class StackGraphics extends Stack {
 	 * @param x 
 	 */
 	private void setGraphicsCoordinates(int x, int y) {
-		StackGraphics.x = x;
-		StackGraphics.y = y;
+		QueueGraphics.x = x;
+		QueueGraphics.y = y;
 	}
 
-	/**
-	 *  Paints items in the structure.
-	 */
+
 	public void paint(Graphics g) {
 		assembleBlocks(g);
 	}
 
-	/**
-	 * Builds the stack with graphics.
-	 */
+
 	protected void assembleBlocks(Graphics g) {
 		buildStrings();
 		setGraphicsCoordinates(240 ,480);
@@ -40,7 +35,8 @@ public class StackGraphics extends Stack {
 		while (stringsToPrint.hasNext()) {
 			setItemString(stringsToPrint.next());
 			if (drawFlags) {
-				drawTopItemFlag(g);
+				drawHeadItemFlag(g);
+				drawTailItemFlag(g);
 			}
 			buildBlock(g);
 			y = y + 30;
@@ -48,29 +44,22 @@ public class StackGraphics extends Stack {
 	}
 
 	/**
-	 * Builds the structure with graphics.
+	 * Checks if the item is the "Head" item to place a indicator(Head->) next to it. 
 	 */
-	protected void buildBlock(Graphics g) {
-		buildBlock(g, x, yPixelHeightOffset());
-	}
-	/**
-	 * Checks if the item is the "Top" item to place a indicator(Top->) next to it. 
-	 */
-	private void drawTopItemFlag(Graphics g) {
-			setBlockFlag("Top");
-			drawFlag(g, x - 35, y + 22 - getPixelHeight());
+	private void drawHeadItemFlag(Graphics g) {
+			setBlockFlag("Head");
+			drawFlag(g, x - 40,  yPixelHeightOffset() + 10);
 			drawFlags = false;
 	}
 	
-
 	protected int yPixelHeightOffset() {
 		return y - getPixelHeight();
 	}
 	
-	/**
-	 * Returns the blocks y height * the size of the Structure.
-	 */
-	protected int getPixelHeight(){
-		return 30 * getSize();
+	private void drawTailItemFlag(Graphics g) {
+		setBlockFlag("Tail");
+		drawFlag(g, x - 35,  y);
 	}
+	
+
 }

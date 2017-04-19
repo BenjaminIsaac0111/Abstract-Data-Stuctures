@@ -1,6 +1,6 @@
 package dataStructures;
 
-public class ListDriver extends dataStructureGraphics {
+public class List extends dataStructureGraphics {
 
 	MyLinkedList<String> list = new MyLinkedList<String>();
 

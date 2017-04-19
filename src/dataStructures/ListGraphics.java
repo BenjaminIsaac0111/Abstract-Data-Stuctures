@@ -8,15 +8,13 @@ import java.awt.Graphics;
  * @param <T>
  *
  */
-public class ListGraphics<T> extends ListDriver {
+public class ListGraphics<T> extends List {
 	//private String stackItemString;
 
 	String head, next;
 	
 	protected static int x;
 	protected static int y;
-
-	
 
 	/**
 	 * Builds and paints stack items.

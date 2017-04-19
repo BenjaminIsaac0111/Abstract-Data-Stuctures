@@ -68,11 +68,6 @@ class MyLinkedList<T> implements AbstractDataStructureInteface<T> {
 
 	}
 
-	@Override
-	public void buildIterator() {
-
-	}
-
 	public T findDataByIndex(int index) {
 		LinkElementSegment<T> segment = head;
 

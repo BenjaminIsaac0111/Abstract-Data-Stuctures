@@ -37,7 +37,4 @@ public interface AbstractDataStructureInteface<T> {
 	
 	int getSize();
 
-	
-	void buildIterator();
-
 }
