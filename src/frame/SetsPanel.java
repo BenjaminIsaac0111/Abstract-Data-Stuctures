@@ -13,25 +13,21 @@ import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 
-import dataStructures.MySet;
-import dataStructures.QueueGraphics;
-import frame.QueuePanel.Canvas;
+import dataStructures.SetGraphics;
 import net.miginfocom.swing.MigLayout;
 
 public class SetsPanel extends PaneLayout {
 	
 	private static final long serialVersionUID = 1L;
 
-	MySet<String> set = new MySet<String>();
+	SetGraphics set = new SetGraphics();
 
-	private JTextField newQueueItem;
+	private JTextField item;
 	private JTextPane queueDescriptionPane;
-
-	private JTextPane peekResult;
 
 	public SetsPanel() {
 		setBackground(Color.WHITE);
-		setLayout(new MigLayout("", "[240.00,grow,fill][168.00][-50.00][640px,grow]", "[20px][60px,grow,fill][60px,grow,fill][][60.00,fill][baseline][31.00px,baseline][60px,grow,fill][108px,grow,fill]"));		
+		setLayout(new MigLayout("", "[240.00,grow,fill][168.00][-50.00][640px,grow]", "[20px][27.00px,fill][16.00px,fill][grow][39.00,grow,fill][grow,baseline][108px,grow,fill]"));		
 		buildLabels();
 		buildButtons();
 		buildTextField();
@@ -43,7 +39,7 @@ public class SetsPanel extends PaneLayout {
 		 Canvas canvas = new Canvas();
 			canvas.setBackground(Color.WHITE);
 			canvas.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			add(canvas, "cell 3 1 1 7,grow");
+			add(canvas, "cell 3 1 1 5,grow");
 			
 			queueDescriptionPane = new JTextPane();
 			queueDescriptionPane.setBackground(UIManager.getColor("text"));
@@ -51,82 +47,84 @@ public class SetsPanel extends PaneLayout {
 			queueDescriptionPane.setEditable(false);
 			queueDescriptionPane.setFont(new Font("Courier New", Font.PLAIN, 14));
 			queueDescriptionPane.setText("In computer science, a set is an abstract data type that can store certain values, without any particular order, and no repeated values. It is a computer implementation of the mathematical concept of a finite set. Unlike most other collection types, rather than retrieving a specific element from a set, one typically tests a value for membership in a set.");
-			add(queueDescriptionPane, "cell 0 8 4 1,growx,aligny bottom");
+			add(queueDescriptionPane, "cell 0 6 4 1,growx,aligny bottom");
+			
 	 }
 	 
 
 	private void buildTextField() {
-		newQueueItem = new JTextField();
-		add(newQueueItem, "cell 0 6,grow");
-		newQueueItem.setColumns(10);
+		item = new JTextField();
+		add(item, "cell 0 2,growx,aligny top");
+		item.setColumns(10);
 	}
 
 
 	private void buildLabels() {
-		JLabel lblResult = new JLabel("Peek result:");
-		add(lblResult, "cell 0 3,alignx center");
+				
+		JLabel lblEnterNewqueue = new JLabel("Item:");
+		lblEnterNewqueue.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(lblEnterNewqueue, "cell 0 1,growx,aligny center");
 		
-		peekResult = new JTextPane();
-		peekResult.setBackground(Color.WHITE);
-		peekResult.setEditable(false);
-		add(peekResult, "cell 0 4,grow");
-
-		JLabel lblEnterNewqueue = new JLabel("Enter new queue Item:");
-		add(lblEnterNewqueue, "cell 0 5,growx,aligny center");
+		
 	}
 
 	private void buildButtons() {
-		JButton btnPop = new JButton("Remove");
-		btnPop.addActionListener(remove -> {doPopOperation();});
-		add(btnPop, "cell 0 1,grow");
-
-		JButton btnPeek = new JButton("Peek");
-		btnPeek.addActionListener(peek -> {doPeekOperation();});
-		add(btnPeek, "cell 0 2,grow");
+		JButton btnRemove = new JButton("Remove");
+		btnRemove.addActionListener(remove -> {doRemoveOperation();});
+		add(btnRemove, "cell 0 4,grow");
 		
-		JButton btnPush = new JButton("add");
-		btnPush.addActionListener(push -> {doPushOperation();});
-		add(btnPush, "cell 0 7,grow");
-	}
-
-	 class Canvas extends JPanel {
-	      @Override
-	      public void paintComponent(Graphics g) {
-	         super.paintComponent(g);
-	         //set.paint(g);
-	      }
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(push -> {doAddOperation();});
+		add(btnAdd, "cell 0 3,grow");
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(push -> {doClearOperation();});
+		add(btnClear, "cell 0 5,grow");
 	}
 	 
 	/**
-	 * Removes item.
+	 * Assigned to the Add button. Calls the additive function.
 	 */
-	private void doPopOperation() {
-		repaintAndValidate();
-		if(!set.remove()){
-			JOptionPane.showMessageDialog(this, "Empty queue. Nothing to Pop!", "Error", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-
-	/**
-	 * Assigned to the Push button. Calls the Push function.
-	 */
-	private void doPushOperation() {
-		if (!newQueueItem.getText().isEmpty()) {
-			set.push(newQueueItem.getText());
+	private void doAddOperation() {
+		
+		if (set.add(item.getText())) {
 			repaintAndValidate();
 		} else {
-			JOptionPane.showMessageDialog(this, "Empty Text Field!", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Item already in the Set!", "Warning", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	/**
+	 * Removes item from the set.
+	 */
+	private void doRemoveOperation() {		
+		if(set.remove(item.getText())){		
+			repaintAndValidate();
+		}else{
+			JOptionPane.showMessageDialog(this, "Empty Text Field. !", "Warning", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 	/**
-	 * Assigned to the Peek button. Calls the Peek function.
+	 * Assigned to the Clears button. Calls the Clear function.
 	 */
-	private void doPeekOperation() {
-		if(set.peek() == null){
-			JOptionPane.showMessageDialog(this, "Empty queue. Nothing to Peek!", "Error", JOptionPane.ERROR_MESSAGE);
+	private void doClearOperation() {
+		if(set.getSize() != 0){
+			set.clear();
+			set.setGraphicsCoordinates(240 ,480);
+			repaintAndValidate();
+			
 		}else{
-			peekResult.setText(queue.peek());
+			JOptionPane.showMessageDialog(this, "Empty queue. Nothing to Clear!", "Warning", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	 @SuppressWarnings("serial")
+	class Canvas extends JPanel {
+	      @Override
+	      public void paintComponent(Graphics g) {
+	         super.paintComponent(g);
+	         set.paint(g);
+	      }
 	}
 }

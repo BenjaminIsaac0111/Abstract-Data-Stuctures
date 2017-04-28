@@ -5,10 +5,11 @@ import java.util.Iterator;
 import java.util.Set;
 
 
-public class MySet<T> implements Set<T> {
+public class MySet<T> extends dataStructureGraphics implements Set<T> {
 
 	private ArrayList<T> list = new ArrayList<T>();
 	
+	//This.
 	@Override
 	public int size() {
 
@@ -20,7 +21,7 @@ public class MySet<T> implements Set<T> {
 		
 		return list.isEmpty();
 	}
-
+	//This
 	@Override
 	public boolean contains(Object o) {
 		
@@ -45,7 +46,7 @@ public class MySet<T> implements Set<T> {
 
 		return list.toArray(a);
 	}
-
+	//This
 	@Override
 	public boolean add(T e) {
 		
@@ -57,7 +58,7 @@ public class MySet<T> implements Set<T> {
 		
 		return true;
 	}
-
+	//This
 	@Override
 	public boolean remove(Object o) {
 		
@@ -75,13 +76,11 @@ public class MySet<T> implements Set<T> {
 		
 		boolean changed = false;
 		
-		// iterate over each element in collection and check whether it is actually added.
 		for(T element: c ) {
 			
-			// call own implementation of add, so element only added if not already present.
 			if ( add(element) )
-				changed = true;	// the element was added, so return a true result
-		}
+				changed = true;	
+			}
 		
 		return changed;
 	}
@@ -97,11 +96,12 @@ public class MySet<T> implements Set<T> {
 
 		return list.removeAll(c);
 	}
-
+	//This.
 	@Override
 	public void clear() {
 		
 		list.clear();	
+		
 	}
 
 }

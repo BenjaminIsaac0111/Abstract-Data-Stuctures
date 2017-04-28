@@ -80,7 +80,7 @@ public class QueuePanel extends PaneLayout {
 		btnPeek.addActionListener(peek -> {doPeekOperation();});
 		add(btnPeek, "cell 0 2,grow");
 		
-		JButton btnPush = new JButton("add");
+		JButton btnPush = new JButton("Add");
 		btnPush.addActionListener(push -> {doPushOperation();});
 		add(btnPush, "cell 0 7,grow");
 	}
