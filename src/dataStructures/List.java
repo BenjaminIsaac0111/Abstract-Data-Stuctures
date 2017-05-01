@@ -1,83 +1,29 @@
 package dataStructures;
 
-public class List extends dataStructureGraphics {
+import java.util.ListIterator;
 
-	MyLinkedList<String> list = new MyLinkedList<String>();
+public interface List<T> {
 
-	protected String getHeadType() {
-		try {
-			return list.getHeadType();
-		} catch (Exception e) {
-		}
-		return "Null";
-	}
+	public boolean add(T e);
 
-	protected String getNextType() {
-		try {
-			return list.getNextType();
-		} catch (Exception e) {
-		}
-		return "Null";
-	}
+	public void add(int index, T element);
 
-	protected LinkElementSegment<String> getHead() {
-		return list.getHead();
-	}
+	public void clear();
 
-	protected LinkElementSegment<String> getNext() {
-		return list.getNext();
-	}
+	public T get(int index);
 
-	/**
-	 * removes the last item from the abstractStructure.
-	 */
-	public boolean pop() {
-		if (list.pop() != null) {
-			return true;
-		}
-		return false;
-	}
+	public boolean isEmpty();
 
-	/**
-	 * pushes a new item into the abstractStructure.
-	 */
-	public void push(String newItemToAdd) {
-		list.push(newItemToAdd);
-	}
+	public ListIterator<T> listIterator();
 
-	/**
-	 * return the last item added to the abstractStructure.
-	 */
-	public String peek() {
-		return list.peek();
-	}
+	public ListIterator<T> listIterator(int index);
 
-	/**
-	 * return the size of the abstractStructure.
-	 */
+	public boolean remove(Object o);
 
-	public int getSize() {
-		try {
-			return list.getSize();
-		} catch (Exception e) {
-		}
-		return 0;
-	}
+	public T remove(int index);
 
-	/**
-	 * Output all items to the terminal.
-	 */
-	public void printItemsToConsole() {
-		LinkElementSegment<String> segment = list.getHead();
+	public T set(int index, T element);
 
-		try {
-			for (int i = 0; i <= list.getSize(); i++) {
-				System.out.println("Data: " + segment.getData() + " || Next: " + segment.getPrevSegmentData()
-						+ " || Index: " + segment.getSize());
-				segment = segment.getPrevSegment();
-			}
-		} catch (Exception e) {
-		}
-	}
-
+	public int size();	
+	
 }
