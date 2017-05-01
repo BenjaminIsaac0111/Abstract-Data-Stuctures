@@ -3,6 +3,7 @@ package frame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,8 +16,6 @@ import dataStructures.ListGraphics;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.border.EtchedBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 /**
  * Custom JPanel for the List tab. Contains all controls for the List
@@ -45,8 +44,7 @@ public class ListPanel extends PaneLayout {
 
 	public ListPanel() {
 		setBackground(Color.WHITE);
-		setLayout(new MigLayout("", "[100.00,fill][55.00,fill][100,fill]",
-				"[20px][60.00px,grow,fill][60.00px,grow,fill][60.00,grow,fill][60.00px,grow,fill][][60.00][baseline][31.00px,baseline][108px,grow,fill]"));
+		setLayout(new MigLayout("", "[100.00,fill][55.00,fill][100,fill]", "[20px][60.00px,grow,fill][60.00px,grow,fill][60.00,grow,fill][60.00,grow,fill][][60.00][baseline][31.00px,baseline][108px,grow,fill]"));
 		buildLabels();
 		buildButtons();
 		buildTextField();
@@ -58,7 +56,7 @@ public class ListPanel extends PaneLayout {
 		Canvas canvas = new Canvas();
 		canvas.setBackground(Color.WHITE);
 		canvas.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		add(canvas, "cell 2 1 1 7,grow");
+		add(canvas, "cell 2 1 1 8,grow");
 
 		ListDescriptionPane = new JTextPane();
 		ListDescriptionPane.setBackground(UIManager.getColor("text"));
@@ -85,6 +83,8 @@ public class ListPanel extends PaneLayout {
 	}
 
 	private void buildLabels() {
+		
+				
 
 		JLabel lblIndex = new JLabel("Index");
 		add(lblIndex, "cell 1 5,growx");
@@ -93,7 +93,7 @@ public class ListPanel extends PaneLayout {
 		add(lblItem, "cell 0 5,growx");
 
 		JLabel lblGetResult = new JLabel("Get result:");
-		add(lblGetResult, "cell 0 7 3 1,growx");
+		add(lblGetResult, "cell 0 7 2 1,grow");
 	}
 
 	private void buildButtons() {
@@ -126,41 +126,57 @@ public class ListPanel extends PaneLayout {
 		btnGet.addActionListener(get -> {
 			doGetOperation();
 		});
-		add(btnGet, "cell 0 3 2 1,grow");
-
+		add(btnGet, "cell 0 3,grow");
+		
 		JButton btnSet = new JButton("Set");
 		btnSet.addActionListener(set -> {
 			doSetOperation();
 		});
-		add(btnSet, "cell 0 4 2 1,grow");
+		add(btnSet, "cell 1 3,grow");
+		
+		JButton btnClear = new JButton("Clear");
+		btnSet.addActionListener(clear -> {
+			List.clear();
+		});
+		add(btnClear, "cell 0 4 2 1,grow");
 
 	}
 
 	private void doAddOperation() {
-		if (!List.add(newListItem.getText())) {
-			JOptionPane.showMessageDialog(this, "Invalid index. Cannot Get!", "Error", JOptionPane.ERROR_MESSAGE);
+		try {
+			if (!List.add(newListItem.getText())) {
+				JOptionPane.showMessageDialog(this, "Invalid Item. Cannot Add!", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(this, "No Item In Text Field!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 	private void doAddAtIndexOperation() {
-		// TODO Auto-generated method stub
-
+		try {
+			List.add(parseIndex(), newListItem.getText());
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(this, "Invalid index. Cannot Add!", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void doGetOperation() {
-		if (List.get(Integer.parseInt(itemIndex.getText())) != null) {
-			getResult.setText(List.get(Integer.parseInt(itemIndex.getText())));
-		} else {
-			JOptionPane.showMessageDialog(this, "Invalid index. Cannot Get!", "Error", JOptionPane.ERROR_MESSAGE);
+		try {
+			if (List.get(parseIndex()) != null) {
+				getResult.setText(List.get(parseIndex()));
+			} else {
+				JOptionPane.showMessageDialog(this, "Invalid index. Cannot Get!", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(this, "Index is Out of Bounds!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 	private void doSetOperation() {
-
 		try {
-			List.set(Integer.parseInt(itemIndex.getText()), newListItem.getText());
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "Invalid index. Cannot Set!", "Error", JOptionPane.ERROR_MESSAGE);
+			List.set(parseIndex(), newListItem.getText());
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(this, "Cannot Set!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -174,13 +190,20 @@ public class ListPanel extends PaneLayout {
 
 	private void doRemoveByIndexOperation() {
 		try {
-			List.remove(Integer.parseInt(itemIndex.getText()));
+			List.remove(parseIndex());
 		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "Invalid index. Nothing to Remove!", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Nothing to Remove!", "Error", JOptionPane.ERROR_MESSAGE);
 
 		}
 
+	}
+
+	private int parseIndex() {
+		try {
+			return Integer.parseInt(itemIndex.getText());
+		} catch (NumberFormatException e) {
+			return -1;
+		}
 	}
 
 }
