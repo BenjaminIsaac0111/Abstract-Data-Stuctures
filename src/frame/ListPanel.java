@@ -3,7 +3,6 @@ package frame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -44,7 +43,8 @@ public class ListPanel extends PaneLayout {
 
 	public ListPanel() {
 		setBackground(Color.WHITE);
-		setLayout(new MigLayout("", "[100.00,fill][55.00,fill][100,fill]", "[20px][60.00px,grow,fill][60.00px,grow,fill][60.00,grow,fill][60.00,grow,fill][][60.00][baseline][31.00px,baseline][108px,grow,fill]"));
+		setLayout(new MigLayout("", "[100.00,fill][55.00,fill][100,fill]",
+				"[20px][60.00px,grow,fill][60.00px,grow,fill][60.00,grow,fill][60.00,grow,fill][][60.00][baseline][31.00px,baseline][108px,grow,fill]"));
 		buildLabels();
 		buildButtons();
 		buildTextField();
@@ -83,8 +83,6 @@ public class ListPanel extends PaneLayout {
 	}
 
 	private void buildLabels() {
-		
-				
 
 		JLabel lblIndex = new JLabel("Index");
 		add(lblIndex, "cell 1 5,growx");
@@ -101,50 +99,72 @@ public class ListPanel extends PaneLayout {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(add -> {
 			doAddOperation();
+			repaintGraphics();
 		});
 		add(btnAdd, "cell 0 1,grow");
 
 		JButton btnAddAtIndex = new JButton("Add At Index");
 		btnAddAtIndex.addActionListener(AddAtIndex -> {
 			doAddAtIndexOperation();
+			repaintGraphics();
+
 		});
 		add(btnAddAtIndex, "cell 1 1,grow");
 
 		JButton btnRemoveByName = new JButton("Remove By Name");
 		btnRemoveByName.addActionListener(removeByName -> {
 			doRemoveByNameOperation();
+			repaintGraphics();
+
 		});
 		add(btnRemoveByName, "cell 0 2,grow");
 
 		JButton btnRemoveByIndex = new JButton("Remove By Index");
-		btnRemoveByName.addActionListener(removeByIndex -> {
+		btnRemoveByIndex.addActionListener(removeByIndex -> {
 			doRemoveByIndexOperation();
+			repaintGraphics();
+
 		});
 		add(btnRemoveByIndex, "cell 1 2,grow");
 
 		JButton btnGet = new JButton("Get");
 		btnGet.addActionListener(get -> {
 			doGetOperation();
+			repaintGraphics();
+
 		});
 		add(btnGet, "cell 0 3,grow");
-		
+
 		JButton btnSet = new JButton("Set");
 		btnSet.addActionListener(set -> {
 			doSetOperation();
+			repaintGraphics();
+
 		});
 		add(btnSet, "cell 1 3,grow");
-		
+
 		JButton btnClear = new JButton("Clear");
-		btnSet.addActionListener(clear -> {
+		btnClear.addActionListener(clear -> {
 			List.clear();
+			repaintGraphics();
+
 		});
 		add(btnClear, "cell 0 4 2 1,grow");
 
 	}
 
+	private void repaintGraphics() {
+		repaintAndValidate();
+		List.setGraphicsCoordinates(100 ,480);
+
+	}
+
 	private void doAddOperation() {
+		String element = newListItem.getText();
 		try {
-			if (!List.add(newListItem.getText())) {
+			if (!element.isEmpty()) {
+				List.add(element);
+			}else{
 				JOptionPane.showMessageDialog(this, "Invalid Item. Cannot Add!", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} catch (NullPointerException e) {
@@ -176,7 +196,9 @@ public class ListPanel extends PaneLayout {
 		try {
 			List.set(parseIndex(), newListItem.getText());
 		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(this, "Cannot Set!", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Nothing to set!", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (IndexOutOfBoundsException e){
+			JOptionPane.showMessageDialog(this, "Invalid Index. Nothing to set!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -191,8 +213,8 @@ public class ListPanel extends PaneLayout {
 	private void doRemoveByIndexOperation() {
 		try {
 			List.remove(parseIndex());
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "Nothing to Remove!", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(this, "Invalid index. Nothing to Remove!", "Error", JOptionPane.ERROR_MESSAGE);
 
 		}
 

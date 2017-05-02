@@ -12,8 +12,8 @@ public class ListGraphics extends MyList<String> {
 	 * @param x 
 	 */
 	public void setGraphicsCoordinates(int x, int y) {
-		SetGraphics.x = x;
-		SetGraphics.y = y;
+		ListGraphics.x = x;
+		ListGraphics.y = y;
 	}
 
 	/**
@@ -24,11 +24,10 @@ public class ListGraphics extends MyList<String> {
 	}
 
 	/**
-	 * Builds the stack with graphics.
+	 * Builds graphics.
 	 */
 	protected void assembleBlocks(Graphics g) {
 		buildStrings();
-		setGraphicsCoordinates(240 ,480);
 		while (stringsToPrint.hasNext()) {
 			setItemString(stringsToPrint.next());
 			buildBlock(g);
