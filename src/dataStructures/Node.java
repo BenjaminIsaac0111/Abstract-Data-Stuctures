@@ -19,11 +19,6 @@ class Node<T> {
 
 		return element + " has the key " + key;
 
-		/*
-		 * return name + " has the key " + key + "\nLeft Child: " + leftChild +
-		 * "\nRight Child: " + rightChild + "\n";
-		 */
-
 	}
 
 }
