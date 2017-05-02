@@ -60,7 +60,7 @@ public class driver extends JFrame {
 		SetsPanel Set = new SetsPanel();
 		tabbedPane.addTab("Set", null, Set, null);
 
-		StackPanel Tree = new StackPanel();
+		TreePanel Tree = new TreePanel();
 		tabbedPane.addTab("Tree", null, Tree, null);
 		
 	}

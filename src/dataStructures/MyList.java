@@ -9,6 +9,7 @@ public class MyList<T> extends dataStructureGraphics implements List<T> {
 	
 	private LinkedList<T> list = new LinkedList<T>();
 	protected Iterator<T> stringsToPrint;
+	int currentIndex;
 	
 	
 	@Override
@@ -75,5 +76,5 @@ public class MyList<T> extends dataStructureGraphics implements List<T> {
 	public void buildStrings(){
 		stringsToPrint = list.iterator();
 	}
-	
+		
 }

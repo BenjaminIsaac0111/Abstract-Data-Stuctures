@@ -155,8 +155,6 @@ public class ListPanel extends PaneLayout {
 
 	private void repaintGraphics() {
 		repaintAndValidate();
-		List.setGraphicsCoordinates(100 ,480);
-
 	}
 
 	private void doAddOperation() {
