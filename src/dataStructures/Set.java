@@ -8,6 +8,11 @@ public class Set extends dataStructureGraphics {
 	
 	protected Iterator<String> stringsToPrint;
 	
+	/**
+	 * Add Item to the Set.
+	 * @param o
+	 * @return
+	 */
 	public boolean add(String o){
 		try {
 			if(set.add(o)){
@@ -20,6 +25,11 @@ public class Set extends dataStructureGraphics {
 		}
 	}
 	
+	/**
+	 * Remove item from Set.
+	 * @param o
+	 * @return
+	 */
 	public boolean remove(String o){
 		try {
 			if(set.remove(o)){
@@ -34,10 +44,17 @@ public class Set extends dataStructureGraphics {
 	
 	
 	
+	/**
+	 * Empty the Set.
+	 */
 	public void clear(){
 		set.clear();
 	}
 	
+	/**
+	 * Returns size of set.
+	 * @return
+	 */
 	public int getSize(){
 		return set.size();
 	}

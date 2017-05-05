@@ -1,9 +1,19 @@
 package dataStructures;
 
+/**
+ * @author Ben
+ *
+ * @param <T>
+ */
 public class MyBinaryTree<T> {
 
 	Node<T> root;
 
+	/**
+	 * Add a new node at specified index.
+	 * @param key
+	 * @param element
+	 */
 	public void addNode(int key, T element) {
 
 		Node<T> newNode = new Node<T>(key, element);
@@ -64,6 +74,11 @@ public class MyBinaryTree<T> {
 
 	}
 
+	/**
+	 * Find Node at Specified Index.
+	 * @param key
+	 * @return
+	 */
 	public Node<T> findNode(int key) {
 
 		Node<T> focusNode = root;

@@ -2,8 +2,10 @@ package dataStructures;
 
 public class Queue extends StackGraphics {
 
+	
 	/**
-	 * removes the last item from the Queue.
+	 * Removes first Item from Queue.
+	 * @return boolean
 	 */
 	public boolean remove() {
 		try {
